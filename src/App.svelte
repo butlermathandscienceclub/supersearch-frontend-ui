@@ -1,14 +1,20 @@
 <script>
+	window.isd = 0;
+
 function go(){
 	var i = document.forms["in"]["in1"].value
-	document.getElementById("if").src = `https://s-api.kellanb.repl.co/?search=${i}`;
+		if (window.isd == 1){	document.getElementById("if").src = `https://s-api.kellanb.repl.co/?search=${i}&dark=2`;
 		document.getElementById("if").style.display = "block"
-
-		
+}
+else
+{	document.getElementById("if").src = 
+	
+	`https://s-api.kellanb.repl.co/?search=${i}`;
+		document.getElementById("if").style.display = "block"
+}		
 document.getElementsByClassName("noif")[0].style.display = "none"
 document.getElementById("foot").style.display = "none"
 }
-window.isd = 0;
 function dark(){
 if(window.isd==0)
 {document.querySelector(":root").style.color = "white"
@@ -82,11 +88,8 @@ footer {
    width:100%;
    height:60px;
 }
-#in1{
-	  width: 50%;
-		height:30px;
-		  border-radius: 25px;
-	padding:12px 20px
+#in1{  width: 50%;
+height:30px;border-radius: 25px;padding:12px 20px
 }
 #b1{
 	width:90px;
@@ -95,5 +98,4 @@ footer {
 #b1::after{
 	content: var(--se)
 }
-
 </style>
