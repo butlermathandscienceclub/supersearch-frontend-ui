@@ -1,8 +1,23 @@
 <script>
+			import { onMount } from 'svelte';
+
+	function print(zz){
+		console.log(zz)
+	}
 	window.isd = 0;
+		function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 function go(){
-	var i = document.forms["in"]["in1"].value
+	var i=document.forms["in"]["in1"].value
+	print(i)
+
 		if (window.isd == 1){	document.getElementById("if").src = `https://s-api.kellanb.repl.co/?search=${i}&dark=2`;
 		document.getElementById("if").style.display = "block"
 }
@@ -29,13 +44,37 @@ window.isd = 0;
 }
 
 }
+console.log(getParameterByName("in1"))
+if (getParameterByName("in1") != null)
+{
 
-</script>
+
+	onMount(async () => 
+
+{	var i=getParameterByName("in1")
+	print(i)
+
+		if (window.isd == 1){	document.getElementById("if").src = `https://s-api.kellanb.repl.co/?search=${i}&dark=2`;
+		document.getElementById("if").style.display = "block"
+}
+else
+{	document.getElementById("if").src = 
+	
+	`https://s-api.kellanb.repl.co/?search=${i}`;
+		document.getElementById("if").style.display = "block"
+}		
+document.getElementsByClassName("noif")[0].style.display = "none"
+document.getElementById("foot").style.display = "none"
+
+
+}
+	);
+
+}</script>
 <main>
 <div class="noif">
 	<h1>super search!</h1>
 	<br>
-	<p> press search. Please don't press enter</p>
 	<form name="in">
 		<input name="in1" placeholder="search the web!" id="in1" > 
 	</form>
@@ -88,8 +127,11 @@ footer {
    width:100%;
    height:60px;
 }
-#in1{  width: 50%;
-height:30px;border-radius: 25px;padding:12px 20px
+#in1{
+	  width: 50%;
+		height:30px;
+		  border-radius: 25px;
+	padding:12px 20px
 }
 #b1{
 	width:90px;
@@ -98,4 +140,5 @@ height:30px;border-radius: 25px;padding:12px 20px
 #b1::after{
 	content: var(--se)
 }
+
 </style>
